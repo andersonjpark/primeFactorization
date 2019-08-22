@@ -1,4 +1,5 @@
 def allPrimesLessThan(N):
+
     '''Input: Integer N
        Output: A list of all primes less than N
 
@@ -12,7 +13,7 @@ def allPrimesLessThan(N):
     primeList = []
     candidate = 2
     while (candidate < N):
-    
+
         #counts the number of divisors of candidate
 
         foundDivisor = False
@@ -20,17 +21,18 @@ def allPrimesLessThan(N):
             if candidate % divisor == 0:
                 foundDivisor = True #divisor found, not a prime number
                 break # don't check anymore, one divisor is enough
-            
+
         if not foundDivisor: # aka if foundDivisor is False
             primeList.append(candidate)
-        candidate +=1 
+        candidate +=1
 
     return primeList
 
 def divideByPrimeUnder(N):
+
     '''
     Input: Integer N
-    
+
     Output: A list of all primes that can divide N
 
     e.g. divideByPrimeUnder(12) returns [2,2,3].'''
@@ -42,17 +44,17 @@ def divideByPrimeUnder(N):
     for divisor in primeList:
 
         if N % divisor ==0:
-            
+
             while N % divisor == 0:
                 # start of the loop to check how many same divisors are in N
-                divisionList.append(divisor) 
+                divisionList.append(divisor)
                 N = N / divisor # then we make a new N to see if it can be divided by the same
                                 #number that was just appended
 
     return divisionList
 
 def myCount(N):
-    
+
     '''
     Input: Integer N
 
@@ -69,7 +71,7 @@ def myCount(N):
 
     dL = divideByPrimeUnder(N)
 
-    s = '' 
+    s = ''
     if dL == []: #when N is a primeNumber
         s = s + '{:4s} {:8s}\n'.format('p','exponent')
         s = s + '-'*13 + '\n' #\n makes sure that the new line is made
@@ -83,9 +85,9 @@ def myCount(N):
         #from divisionList, counts how many same 'd' is in the list and displays the result
     return s
 
-if __name__ == "__main__": 
+if __name__ == "__main__":
 
-    listOfFns = [allPrimesLessThan,divideByPrimeUnder,myCount] 
+    listOfFns = [allPrimesLessThan,divideByPrimeUnder,myCount]
 
     descriptions = ["""\t Gives a list of all primes that are less than or equal to its input""",
                     """\t Gives a list of all primes that divide the input""",
@@ -93,11 +95,11 @@ if __name__ == "__main__":
     while True:
         my_number = input("What integer do you want me to factorize? (If none, input 0): ")
 
-        if int(my_number) == 0: 
-            break 
+        if int(my_number) == 0:
+            break
 
         for index,fn in enumerate(listOfFns):
-            
+
             print "Option {}: Apply {}".format(index,fn.__name__)
             print "           {}".format(descriptions[index])
             print ""
@@ -105,10 +107,10 @@ if __name__ == "__main__":
         print "Option 3: Quit"
 
         option = input("Please enter your option: ")
-        if option == 3: 
+        if option == 3:
                 break
 
         try:
             print listOfFns[option](my_number)
-        except ValueError: 
+        except ValueError:
             print "Number {} is too big, please use something under 50000".format(my_number)
